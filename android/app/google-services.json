@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "52219548078",
+    "project_id": "indexa-96cad",
+    "storage_bucket": "indexa-96cad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:52219548078:android:8ccefff12e424dc672b83f",
+        "android_client_info": {
+          "package_name": "com.ICMA.indexa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "52219548078-ijcsqdbcnun5ot7nah2farkl653k8s4d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFRQp2Pkb5jJYeA9oiiU1FWURNMzVjeLg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "52219548078-ijcsqdbcnun5ot7nah2farkl653k8s4d.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "52219548078-4tj95od2744fnetcfl0tshbmf376o935.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ICMA.indexa"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
