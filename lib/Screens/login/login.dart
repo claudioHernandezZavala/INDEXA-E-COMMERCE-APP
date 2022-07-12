@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:indexa/Screens/login/register.dart';
 import 'package:video_player/video_player.dart';
 
@@ -45,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
     final height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: Colors.white.withOpacity(0.7),
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Stack(
           children: [
@@ -59,9 +60,9 @@ class _LoginPageState extends State<LoginPage> {
                     height: 25,
                   ),
                   Image.asset(
-                    logopath,
+                    "assets/loginpic.png",
                     width: width * 0.6,
-                    height: height * 0.17,
+                    height: height * 0.3,
                   ),
                   const SizedBox(
                     height: 2,
@@ -69,27 +70,46 @@ class _LoginPageState extends State<LoginPage> {
                   Center(
                     child: Container(
                       width: width * 0.8,
-                      padding: const EdgeInsets.all(25),
-                      decoration: BoxDecoration(
-                        color: color1.withOpacity(0.9),
-                        borderRadius: BorderRadius.circular(5),
-                      ),
+                      padding: const EdgeInsets.all(15),
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
-                            Text(
-                              "Bienvenido",
-                              style: Theme.of(context).textTheme.bodyMedium,
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                "Bienvenid@",
+                                textAlign: TextAlign.start,
+                                style: GoogleFonts.oswald(fontSize: 30),
+                              ),
                             ),
                             const SizedBox(
-                              height: 5,
+                              height: 10,
                             ),
                             Padding(
                               padding: const EdgeInsets.only(bottom: 15.0),
                               child: TextFormField(
                                 controller: eController,
-                                decoration:
-                                    const InputDecoration(hintText: "Email"),
+                                decoration: InputDecoration(
+                                  hintText: "Email",
+                                  focusColor: Colors.green,
+                                  fillColor: Colors.grey.withOpacity(0.3),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(15),
+                                    borderSide: const BorderSide(
+                                        color: Colors.blue, width: 2),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                    borderSide: const BorderSide(
+                                        color: Colors.green, width: 3),
+                                  ),
+                                  filled: true,
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                      borderSide: const BorderSide(
+                                          color: Colors.blue, width: 3),
+                                      gapPadding: 15),
+                                ),
                               ),
                             ),
                             Padding(
@@ -97,8 +117,26 @@ class _LoginPageState extends State<LoginPage> {
                               child: TextFormField(
                                 controller: pController,
                                 obscureText: true,
-                                decoration:
-                                    const InputDecoration(hintText: "Password"),
+                                decoration: InputDecoration(
+                                  hintText: "Password",
+                                  fillColor: Colors.grey.withOpacity(0.3),
+                                  filled: true,
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                    borderSide: const BorderSide(
+                                        color: Colors.green, width: 3),
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(15),
+                                    borderSide: const BorderSide(
+                                        color: Colors.blue, width: 2),
+                                  ),
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(15),
+                                    borderSide: const BorderSide(
+                                        color: Colors.green, width: 3),
+                                  ),
+                                ),
                               ),
                             ),
                             const SizedBox(
@@ -121,7 +159,7 @@ class _LoginPageState extends State<LoginPage> {
                                   color: color1,
                                 ),
                                 label: const Text(
-                                  "Sign in",
+                                  "Iniciar sesion",
                                   style: TextStyle(
                                     color: Colors.white,
                                   ),
