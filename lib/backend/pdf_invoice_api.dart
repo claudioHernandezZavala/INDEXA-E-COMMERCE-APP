@@ -72,18 +72,12 @@ Widget buildInvoice(Invoice invoice) {
   return Table.fromTextArray(
     headers: headers,
     data: data,
-    cellStyle: TextStyle(fontSize: 18, color: PdfColors.black),
+    cellStyle: const TextStyle(fontSize: 18, color: PdfColors.black),
     headerDecoration: BoxDecoration(
       color: PdfColor.fromHex("150B76"),
     ),
-    headerStyle: TextStyle(fontSize: 18, color: PdfColors.white),
+    headerStyle: const TextStyle(fontSize: 18, color: PdfColors.white),
     cellHeight: 30,
-  );
-}
-
-Widget buildTotaleinfo(Invoice invoice, double descuento, double total) {
-  return Table.fromTextArray(
-    data: [],
   );
 }
 
@@ -91,107 +85,99 @@ Widget buildTotal(Invoice invoice, double descuento, double total) {
   final data2 = [
     [
       "SUBTOTAL",
-      total,
+      total.toStringAsFixed(2),
     ],
     [
       "EXE",
-      15,
+      15.toStringAsFixed(2),
     ],
     [
       "SUB-T",
-      total - 10,
+      (total - 10).toStringAsFixed(2),
     ],
     [
       "ISV",
-      5,
+      5.toStringAsFixed(2),
     ],
     [
       "TOTAL",
-      total + 5,
+      (total + 5).toStringAsFixed(2),
     ]
   ];
-  final data = invoice.items.map((item) {
-    return [
-      "SUBTOTAL",
-      total,
-      "EXE",
-      15,
-      "SUB-T",
-      total - 10,
-      "ISV",
-      5,
-      "TOTAL",
-      total + 5,
-    ];
-  }).toList();
-  return Container(
-    alignment: Alignment.centerRight,
-    child: Row(
-      children: [
-        //Spacer(flex: 6),
-        Expanded(
-          flex: 6,
-          child: Container(
-              padding: EdgeInsets.only(bottom: 15, top: 5, left: 5),
-              decoration: BoxDecoration(
-                  border: Border.all(
-                      color: PdfColors.black,
-                      width: 1.5,
-                      style: BorderStyle.solid)),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("COTIZACIÓN VALIDA POR 3 DÍAS", style: style),
-                  Text("CRÉDITO 30 DÍAS HÁBILES", style: style),
-                  Text(
-                      "ENTREGA GRATUITA A SU OFICINA (VALIDO PARA TEGUCIGALPA)",
-                      style: style),
-                  Text("NO SE ACEPTAN DEVOLUCIONES", style: style),
-                ],
-              )),
-        ),
-        Table.fromTextArray(
-            //  headers: ["SUBTOTAL", "EXE", "SUB-T", "ISV", "TOTAL"],
+  final datatexto = [
+    ["COTIZACIÓN VALIDA POR 3 DÍAS"],
+    ["CRÉDITO 30 DÍAS HÁBILES"],
+    ["ENTREGA GRATUITA A SU OFICINA (VALIDO PARA TEGUCIGALPA)"],
+    ["NO SE ACEPTAN DEVOLUCIONES"]
+  ];
 
-            data: data2,
-            headerCount: 2),
-        /*
-        Expanded(
-          flex: 3,
+  return Row(
+    children: [
+      Container(
+          width: 328,
+          padding: const EdgeInsets.only(bottom: 25, top: 4, left: 5),
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: PdfColors.black,
+              width: 1,
+              style: BorderStyle.solid,
+            ),
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              buildText(
-                title: 'Sub-total',
-                value: '${total.toStringAsFixed(2)} Lps.',
-                unite: true,
-              ),
-              buildText(
-                title: 'Descuento',
-                value: '- ${descuento.toStringAsFixed(2)} Lps.',
-                unite: true,
-              ),
-              Divider(),
-              buildText(
-                title: 'Total',
-                titleStyle: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-                value: '${(total).toStringAsFixed(2)} Lps.',
-                unite: true,
-              ),
-              SizedBox(height: 2 * PdfPageFormat.mm),
-              Container(height: 1, color: PdfColors.grey400),
-              SizedBox(height: 0.5 * PdfPageFormat.mm),
-              Container(height: 1, color: PdfColors.grey400),
+              Text("COTIZACIÓN VALIDA POR 3 DÍAS", style: style),
+              Text("CRÉDITO 30 DÍAS HÁBILES", style: style),
+              Text("ENTREGA GRATUITA A SU OFICINA (VALIDO PARA TEGUCIGALPA)",
+                  style: style),
+              Text("NO SE ACEPTAN DEVOLUCIONES", style: style),
             ],
-          ),
+          )),
+      Expanded(
+        flex: 4,
+        child: Table.fromTextArray(
+          cellAlignment: Alignment.center,
+          data: data2,
+          headerCount: 2,
         ),
+      ),
 
-         */
-      ],
-    ),
+      /*
+      Expanded(
+        flex: 3,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            buildText(
+              title: 'Sub-total',
+              value: '${total.toStringAsFixed(2)} Lps.',
+              unite: true,
+            ),
+            buildText(
+              title: 'Descuento',
+              value: '- ${descuento.toStringAsFixed(2)} Lps.',
+              unite: true,
+            ),
+            Divider(),
+            buildText(
+              title: 'Total',
+              titleStyle: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+              value: '${(total).toStringAsFixed(2)} Lps.',
+              unite: true,
+            ),
+            SizedBox(height: 2 * PdfPageFormat.mm),
+            Container(height: 1, color: PdfColors.grey400),
+            SizedBox(height: 0.5 * PdfPageFormat.mm),
+            Container(height: 1, color: PdfColors.grey400),
+          ],
+        ),
+      ),
+
+       */
+    ],
   );
 }
 

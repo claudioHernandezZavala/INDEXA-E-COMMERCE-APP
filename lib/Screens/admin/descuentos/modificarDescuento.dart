@@ -30,9 +30,6 @@ class _ModificarDescuentoState extends State<ModificarDescuento> {
       appBar: AppBar(
         title: const Text("Modificar Descuento"),
         centerTitle: true,
-        backgroundColor: color2,
-        titleTextStyle: styleLetrasAppBar,
-        foregroundColor: color3,
       ),
       body: ListView(
         children: [
@@ -102,7 +99,7 @@ class _ModificarDescuentoState extends State<ModificarDescuento> {
                           const TextStyle(color: Colors.white, fontSize: 18),
                       floatingLabelStyle: TextStyle(
                           color: Colors.black,
-                          backgroundColor: color2,
+                          backgroundColor: color3,
                           fontSize: 20,
                           fontWeight: FontWeight.bold),
                       fillColor: color3,
@@ -138,7 +135,7 @@ class _ModificarDescuentoState extends State<ModificarDescuento> {
                           const TextStyle(color: Colors.white, fontSize: 18),
                       floatingLabelStyle: TextStyle(
                           color: Colors.black,
-                          backgroundColor: color2,
+                          backgroundColor: color3,
                           fontSize: 20,
                           fontWeight: FontWeight.bold),
                       fillColor: color3,

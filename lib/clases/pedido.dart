@@ -7,9 +7,9 @@ import 'package:intl/intl.dart';
 import '../constants.dart';
 import '../usuario/infoUsuario.dart';
 
-class pedido {
+class cotiza {
   String fechaPedido;
-  String detallesExtras, cuponUtilizado;
+  // String detallesExtras, cuponUtilizado;
   double total;
   justGeneralInfo infoUsuario;
   List<itemsPedidos> itemsDelPedido;
@@ -20,10 +20,10 @@ class pedido {
   bool enProgreso;
   bool entregado;
 
-  pedido(
+  cotiza(
       this.fechaPedido,
-      this.detallesExtras,
-      this.cuponUtilizado,
+      // this.detallesExtras,
+      // this.cuponUtilizado,
       this.total,
       this.infoUsuario,
       this.itemsDelPedido,
@@ -34,21 +34,21 @@ class pedido {
       this.enProgreso,
       this.entregado);
 
-  factory pedido.fromJson(dynamic json, DocumentReference reference) {
-    return pedido(
+  factory cotiza.fromJson(dynamic json, DocumentReference reference) {
+    return cotiza(
         DateFormat('dd-MM-yyyy').format(json['Fecha'].toDate()),
-        json['Detalles de pedido'] as String,
-        json["Cupon utilizado"],
+        // json['Detalles de pedido'] as String,
+        // json["Cupon utilizado"],
         json["Total"],
         justGeneralInfo.fromJson(json["Informacion Cliente"]),
         List<itemsPedidos>.from(varConLista(json['articulos'])
             .map((e) => itemsPedidos.fromJson(e))),
         json['uid'] as String,
         reference,
-        json['id-de-pedido'] as String,
+        json['id-de-cotizacion'] as String,
         json["recibido"] as bool,
-        json["enProgreso"] as bool,
-        json["entregado"] as bool);
+        json["revisada"] as bool,
+        json["confirmada"] as bool);
   }
 /*
   Widget construirPedidoUsuario() {
@@ -140,7 +140,7 @@ class pedido {
       lista.add(ListTile(
         title: Text(
           element.nombre,
-          style: estiloLetras18,
+          // style: estiloLetras18,
         ),
         leading: const Icon(Icons.pages_rounded),
         iconColor: color3,
@@ -164,7 +164,7 @@ List<Widget> itemsGenerator2(List<itemsPedidos> items) {
     lista.add(ListTile(
       title: Text(element.nombre),
       leading: const Icon(Icons.pages_rounded),
-      iconColor: color2,
+      iconColor: color3,
     ));
   }
   return lista;

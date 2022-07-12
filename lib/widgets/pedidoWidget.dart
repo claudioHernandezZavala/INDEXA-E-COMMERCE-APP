@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../clases/pedido.dart';
 
-class PedidoWidget extends StatelessWidget {
-  final pedido pedidoVer;
-  const PedidoWidget({Key? key, required this.pedidoVer}) : super(key: key);
+class CotizacionWidget extends StatelessWidget {
+  final cotiza cotizaver; //la clase es pedido per es cotiza
+  const CotizacionWidget({Key? key, required this.cotizaver}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class PedidoWidget extends StatelessWidget {
           ),
           Center(
               child: Text(
-            "Fecha de tu pedido: ${pedidoVer.fechaPedido}",
+            "Fecha de tu cotiza: ${cotizaver.fechaPedido}",
             style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
           )),
           Row(
@@ -50,19 +50,19 @@ class PedidoWidget extends StatelessWidget {
           const SizedBox(
             height: 15,
           ),
-          const Text("  Detalles de tus pedidos:",
+          const Text("  Detalles de tus cotiza:",
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+          // Padding(
+          //   padding: const EdgeInsets.all(8.0),
+          //   child: Text(
+          //     pedidoVer.detallesExtras,
+          //     style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          //   ),
+          // ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              pedidoVer.detallesExtras,
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              "ID PEDIDO :${pedidoVer.idPedido}",
+              "ID cotiza :${cotizaver.idPedido}",
               style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
           ),
@@ -70,14 +70,14 @@ class PedidoWidget extends StatelessWidget {
             height: 15,
           ),
           const Text("  Productos: "),
-          Column(children: itemsGenerator2(pedidoVer.itemsDelPedido)),
+          Column(children: itemsGenerator2(cotizaver.itemsDelPedido)),
           const Divider(
             thickness: 0.5,
             color: Colors.black,
           ),
           Center(
               child: Text(
-                  "Total del pedido:${pedidoVer.total.toStringAsFixed(2)}")),
+                  "Total de la cotiza:${cotizaver.total.toStringAsFixed(2)}")),
           const SizedBox(
             height: 15,
           )
@@ -86,13 +86,13 @@ class PedidoWidget extends StatelessWidget {
 
   String textoPedido() {
     String texto = "";
-    if (pedidoVer.recibido) {
+    if (cotizaver.recibido) {
       texto = "recibido";
     }
-    if (pedidoVer.enProgreso) {
+    if (cotizaver.enProgreso) {
       texto = "en progreso";
     }
-    if (pedidoVer.entregado) {
+    if (cotizaver.entregado) {
       texto = "entregado";
     }
     return texto;
@@ -100,13 +100,13 @@ class PedidoWidget extends StatelessWidget {
 
   Color estadoPedido() {
     Color colorestado = Colors.black;
-    if (pedidoVer.recibido) {
+    if (cotizaver.recibido) {
       colorestado = Colors.blue;
     }
-    if (pedidoVer.enProgreso) {
+    if (cotizaver.enProgreso) {
       colorestado = Colors.yellow;
     }
-    if (pedidoVer.entregado) {
+    if (cotizaver.entregado) {
       colorestado = Colors.green;
     }
     return colorestado;

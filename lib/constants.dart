@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 var color1 = const Color(0xFFEEF2FF);
-var color2 = const Color(0xFFFF5959);
+// var color2 = const Color(0xFFFF5959);
 //var color3 = const Color(0xFFD09D69);
 var color3 = const Color(0xFF233142);
 var colorwaux = const Color(0xFFF1EDEA);
@@ -13,17 +13,17 @@ var styleLetrasAppBar = GoogleFonts.yuseiMagic(
   color: Color(0xFFEEF2FF),
   fontSize: 25,
 );
-var estiloLetras18 = GoogleFonts.yuseiMagic(
-    fontSize: 18, fontWeight: FontWeight.bold, color: color4);
-var estiloLetras20 = GoogleFonts.yuseiMagic(
-    fontSize: 20, fontWeight: FontWeight.bold, color: color4);
-var estiloLetras22 = GoogleFonts.yuseiMagic(
-    fontSize: 20, fontWeight: FontWeight.bold, color: color4);
-var estiloLetras25 = GoogleFonts.yuseiMagic(
-    fontSize: 20, fontWeight: FontWeight.bold, color: color4);
-var estiloLetras18Dinero = GoogleFonts.yuseiMagic(
-    fontSize: 18, fontWeight: FontWeight.bold, color: Colors.green);
-//hhhh
+// var estiloLetras18 = GoogleFonts.yuseiMagic(
+//     fontSize: 18, fontWeight: FontWeight.bold, color: color4);
+// var estiloLetras20 = GoogleFonts.yuseiMagic(
+//     fontSize: 20, fontWeight: FontWeight.bold, color: color4);
+// var estiloLetras22 = GoogleFonts.yuseiMagic(
+//     fontSize: 20, fontWeight: FontWeight.bold, color: color4);
+// var estiloLetras25 = GoogleFonts.yuseiMagic(
+//     fontSize: 20, fontWeight: FontWeight.bold, color: color4);
+// var estiloLetras18Dinero = GoogleFonts.yuseiMagic(
+//     fontSize: 18, fontWeight: FontWeight.bold, color: Colors.green);
+// //hhhh
 InputDecoration InputStyle(String labelText) {
   return InputDecoration(
     labelText: labelText,

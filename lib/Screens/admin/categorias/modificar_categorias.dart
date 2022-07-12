@@ -31,7 +31,7 @@ class _ModificarCategoriaState extends State<ModificarCategoria> {
         title: const Text("Modificar Categoria"),
         titleTextStyle: styleLetrasAppBar,
         foregroundColor: color3,
-        backgroundColor: color2,
+        backgroundColor: color3,
       ),
       body: ListView(
         children: [

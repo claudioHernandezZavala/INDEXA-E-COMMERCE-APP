@@ -45,11 +45,11 @@ class _LoginPageState extends State<LoginPage> {
     final height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: const Color(0xFFFBF8F1),
+      backgroundColor: Colors.white.withOpacity(0.7),
       body: SafeArea(
         child: Stack(
           children: [
-            VideoPlayer(_controller),
+            //VideoPlayer(_controller),
             SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -60,8 +60,8 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   Image.asset(
                     logopath,
-                    width: width * 0.2,
-                    height: height * 0.15,
+                    width: width * 0.6,
+                    height: height * 0.17,
                   ),
                   const SizedBox(
                     height: 2,
@@ -79,7 +79,7 @@ class _LoginPageState extends State<LoginPage> {
                           children: [
                             Text(
                               "Bienvenido",
-                              style: estiloLetras22,
+                              style: Theme.of(context).textTheme.bodyMedium,
                             ),
                             const SizedBox(
                               height: 5,
@@ -118,7 +118,7 @@ class _LoginPageState extends State<LoginPage> {
                                             color3)),
                                 icon: Icon(
                                   Icons.lock_open,
-                                  color: color2,
+                                  color: color1,
                                 ),
                                 label: const Text(
                                   "Sign in",
@@ -131,7 +131,7 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             Text(
                               "O inicia con google",
-                              style: estiloLetras20,
+                              style: Theme.of(context).textTheme.bodyMedium,
                             ),
                             Container(
                                 margin: const EdgeInsets.all(10),
@@ -144,13 +144,15 @@ class _LoginPageState extends State<LoginPage> {
                                       //    _controller.dispose();
                                       googleSignIn(context);
                                     },
-                                    icon:
-                                        const FaIcon(FontAwesomeIcons.google))),
+                                    icon: const FaIcon(
+                                      FontAwesomeIcons.google,
+                                      color: Colors.white,
+                                    ))),
                             Text(
                               "Aun no tienes una cuenta?",
                               style: height <= 700
-                                  ? estiloLetras18
-                                  : estiloLetras20,
+                                  ? Theme.of(context).textTheme.bodyMedium
+                                  : Theme.of(context).textTheme.bodyMedium,
                             ),
                             TextButton.icon(
                                 onPressed: () {
@@ -166,7 +168,7 @@ class _LoginPageState extends State<LoginPage> {
                                             color3)),
                                 icon: Icon(
                                   Icons.receipt,
-                                  color: color2,
+                                  color: color1,
                                 ),
                                 label: const Text(
                                   "Sign up",

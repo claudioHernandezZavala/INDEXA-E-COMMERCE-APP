@@ -241,7 +241,7 @@ class _OnboardState extends State<Onboard> {
                             builder: (context2) => AlertDialog(
                                   title: const Text(
                                       "Como deberiamos de identificarte?"),
-                                  backgroundColor: color2,
+                                  backgroundColor: color3,
                                   content: Container(
                                     width: w * 0.6,
                                     height: h * 0.3,

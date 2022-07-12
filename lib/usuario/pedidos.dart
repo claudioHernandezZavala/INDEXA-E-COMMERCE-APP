@@ -16,7 +16,7 @@ class Pedidos extends StatefulWidget {
 }
 
 class _PedidosState extends State<Pedidos> {
-  List<pedido> pedidos = [];
+  List<cotiza> pedidos = [];
   @override
   void initState() {
     // TODO: implement initState
@@ -27,12 +27,12 @@ class _PedidosState extends State<Pedidos> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Mis pedidos"),
-          backgroundColor: color2,
+          title: const Text("Mis cotizaciones"),
+          backgroundColor: color3,
         ),
         body: StreamBuilder(
             stream: FirebaseFirestore.instance
-                .collection("pedidos/")
+                .collection("cotizaciones/")
                 .where("uid",
                     isEqualTo:
                         FirebaseAuth.instance.currentUser!.uid.toString())
@@ -83,7 +83,7 @@ class _PedidosState extends State<Pedidos> {
                         width: 300,
                       ),
                       const Text(
-                        "Aun no tienes pedidos!",
+                        "Aun no tienes cotizaciones!",
                         style: TextStyle(color: Colors.black, fontSize: 20),
                       ),
                     ],
@@ -118,8 +118,8 @@ class _PedidosState extends State<Pedidos> {
                                 onPressed: () {}, icon: Icon(Icons.delete))
                           ],
                         ),
-                        child: PedidoWidget(
-                          pedidoVer: pedidos[index],
+                        child: CotizacionWidget(
+                          cotizaver: pedidos[index],
                         ));
                   });
             }));

@@ -63,7 +63,7 @@ class AllProducts extends StatelessWidget {
                   ),
                   Text(
                     "No hay productos por ahora",
-                    style: estiloLetras22,
+                    style: Theme.of(context).textTheme.bodyMedium,
                   )
                 ],
               );

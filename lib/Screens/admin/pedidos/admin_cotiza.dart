@@ -5,17 +5,17 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../clases/pedido.dart';
 import '../../../constants.dart';
 import '../../../funciones/funciones_firebase.dart';
-import 'screenPedido.dart';
+import 'screenCotiza.dart';
 
-class AdminPedidos extends StatefulWidget {
-  const AdminPedidos({Key? key}) : super(key: key);
+class AdminCotiza extends StatefulWidget {
+  const AdminCotiza({Key? key}) : super(key: key);
 
   @override
-  State<AdminPedidos> createState() => _AdminPedidosState();
+  State<AdminCotiza> createState() => _AdminCotizaState();
 }
 
-class _AdminPedidosState extends State<AdminPedidos> {
-  List<pedido> pedidos = [];
+class _AdminCotizaState extends State<AdminCotiza> {
+  List<cotiza> cotizas = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,12 +23,10 @@ class _AdminPedidosState extends State<AdminPedidos> {
       appBar: AppBar(
         title: const Text("Pedidos"),
         centerTitle: true,
-        titleTextStyle: styleLetrasAppBar,
-        foregroundColor: color3,
-        backgroundColor: color2,
       ),
       body: StreamBuilder(
-        stream: FirebaseFirestore.instance.collection("pedidos/").snapshots(),
+        stream:
+            FirebaseFirestore.instance.collection("cotizaciones/").snapshots(),
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
             return Column(
@@ -73,7 +71,7 @@ class _AdminPedidosState extends State<AdminPedidos> {
                     width: 300,
                   ),
                   const Text(
-                    "Aun no tienes pedidos pendientes",
+                    "Aun no se han hecho cotizaciones",
                     style: TextStyle(color: Colors.black, fontSize: 20),
                   ),
                 ],
@@ -81,29 +79,29 @@ class _AdminPedidosState extends State<AdminPedidos> {
             );
           }
           if (snapshot.hasData) {
-            pedidos = obtenerPedidos(snapshot);
+            cotizas = obtenerPedidos(snapshot);
           }
           return ListView.builder(
-              itemCount: pedidos.length,
+              itemCount: cotizas.length,
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) =>
-                            ScreenPedidoInfo(pedidoVer: pedidos[index])));
+                            ScreenCotizaInfo(cotizaVer: cotizas[index])));
                   },
                   child: Container(
                       margin: const EdgeInsets.all(15),
                       padding: const EdgeInsets.only(top: 15),
                       decoration: BoxDecoration(
-                          color: color3,
+                          color: Colors.orange,
                           borderRadius: BorderRadius.circular(15)),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Center(
                             child: Text(
-                              pedidos[index].idPedido,
+                              cotizas[index].idPedido,
                               style: style1,
                             ),
                           ),
@@ -112,7 +110,7 @@ class _AdminPedidosState extends State<AdminPedidos> {
                           ),
                           Center(
                             child: Text(
-                              "Pedido hecho por:${pedidos[index].infoUsuario.nombre}",
+                              "Cotiza hecho por:${cotizas[index].infoUsuario.nombre}",
                               style: style1,
                             ),
                           ),
@@ -121,7 +119,7 @@ class _AdminPedidosState extends State<AdminPedidos> {
                           ),
                           Center(
                             child: Text(
-                              "Fecha de pedido:${pedidos[index].fechaPedido}",
+                              "Fecha de cotiza:${cotizas[index].fechaPedido}",
                               style: style1,
                             ),
                           ),

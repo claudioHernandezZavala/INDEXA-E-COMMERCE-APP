@@ -17,7 +17,7 @@ class NoUserWidget extends StatelessWidget {
       child: Container(
         height: heigth,
         width: width,
-        color: color2,
+        color: color3,
         padding: const EdgeInsets.all(25),
         child: SingleChildScrollView(
           child: Column(

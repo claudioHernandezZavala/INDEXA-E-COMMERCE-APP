@@ -52,7 +52,6 @@ class _ModificaProductoState extends State<ModificaProducto> {
         title: const Text("Modificar producto"),
         foregroundColor: color3,
         titleTextStyle: styleLetrasAppBar,
-        backgroundColor: color2,
       ),
       body: subiendo
           ? cargando()

@@ -28,7 +28,8 @@ obtainProducts(AsyncSnapshot<QuerySnapshot> snapshot) {
         data['precio'],
         data['material'],
         data['categoria'],
-        documentSnapshot.reference);
+        documentSnapshot.reference,
+        data["isv"]);
   }).toList();
 }
 
@@ -88,7 +89,7 @@ Future<justGeneralInfo> getInfoForCotizacion() async {
 obtenerPedidos(AsyncSnapshot<QuerySnapshot> snapshot) {
   return snapshot.data!.docs.map((DocumentSnapshot document) {
     Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
-    return pedido.fromJson(data, document.reference);
+    return cotiza.fromJson(data, document.reference);
   }).toList();
 }
 
@@ -299,39 +300,42 @@ getFavorites() async {
   refs = data["favorites"].cast<DocumentReference>();
   for (var element in refs) {
     await element.get().then((prod) {
-      favsMostrar.add(Producto(
-          prod["imagenes"].cast<String>(),
-          prod["nombre"],
-          prod["descripcion"],
-          prod["precio"],
-          prod["material"],
-          prod["categoria"],
-          prod.reference));
+      favsMostrar.add(
+        Producto(
+            prod["imagenes"].cast<String>(),
+            prod["nombre"],
+            prod["descripcion"],
+            prod["precio"],
+            prod["material"],
+            prod["categoria"],
+            prod.reference,
+            prod["isv"]),
+      );
     });
   }
 
   return favsMostrar;
 }
 
-getFavorites2(AsyncSnapshot<DocumentSnapshot> snap) async {
-  List<Producto> favsMostrar = [];
-  var ref = FirebaseFirestore.instance
-      .collection("usuarios/")
-      .doc(FirebaseAuth.instance.currentUser?.uid);
-  List<DocumentReference> refs = [];
-  Map<String, dynamic> data = snap.data?.data() as Map<String, dynamic>;
-
-  refs = data["favorites"].cast<DocumentReference>();
-
-  await refs[0].get().then((prod) {
-    favsMostrar.add(Producto(
-        prod["imagenes"].cast<String>(),
-        prod["nombre"],
-        prod["descripcion"],
-        prod["precio"],
-        prod["material"],
-        prod["categoria"],
-        prod.reference));
-  });
-  return favsMostrar;
-}
+// getFavorites2(AsyncSnapshot<DocumentSnapshot> snap) async {
+//   List<Producto> favsMostrar = [];
+//   var ref = FirebaseFirestore.instance
+//       .collection("usuarios/")
+//       .doc(FirebaseAuth.instance.currentUser?.uid);
+//   List<DocumentReference> refs = [];
+//   Map<String, dynamic> data = snap.data?.data() as Map<String, dynamic>;
+//
+//   refs = data["favorites"].cast<DocumentReference>();
+//
+//   await refs[0].get().then((prod) {
+//     favsMostrar.add(Producto(
+//         prod["imagenes"].cast<String>(),
+//         prod["nombre"],
+//         prod["descripcion"],
+//         prod["precio"],
+//         prod["material"],
+//         prod["categoria"],
+//         prod.reference,prod["isv"]));
+//   });
+//   return favsMostrar;
+// }

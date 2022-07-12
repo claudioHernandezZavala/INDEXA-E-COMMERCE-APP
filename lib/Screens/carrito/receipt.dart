@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ticket_widget/ticket_widget.dart';
 
-import '../../backend/excelfile.dart';
+import '../../backend/pdf_invoice_api.dart';
 import '../../clases/ItemCarrito.dart';
+import '../../clases/invoices/customerInfo.dart';
 import '../../clases/invoices/invoiceClass.dart';
 import '../../constants.dart';
 import '../../usuario/infoUsuario.dart';
@@ -56,8 +58,6 @@ class _ReciboState extends State<Recibo> {
     return Scaffold(
         backgroundColor: color4,
         appBar: AppBar(
-          backgroundColor: color2,
-          foregroundColor: color3,
           automaticallyImplyLeading: false,
           actions: [
             IconButton(
@@ -79,7 +79,6 @@ class _ReciboState extends State<Recibo> {
                         backgroundColor:
                             MaterialStateProperty.all<Color?>(color3)),
                     onPressed: () async {
-                      /*
                       Invoice invoice;
                       invoice = Invoice(
                           descuento: widget.descuento,
@@ -100,11 +99,10 @@ class _ReciboState extends State<Recibo> {
                             backgroundColor: Colors.green);
                       });
 
-                       */
-                      createAndSaveExcel();
+                      //createAndSaveExcel();
                     },
                     child: const Text(
-                      "Descargar una factura pdf",
+                      "Descargar cotizacion en pdf",
                       style: TextStyle(color: Colors.white),
                     )),
                 const SizedBox(

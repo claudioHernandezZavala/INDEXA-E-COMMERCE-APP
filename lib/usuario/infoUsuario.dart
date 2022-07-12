@@ -30,8 +30,8 @@ class justGeneralInfo {
 
   justGeneralInfo(this.nombre, this.direccion, this.numero, this.token);
   factory justGeneralInfo.fromJson(dynamic json) {
-    return justGeneralInfo(json['Nombre'] as String, json['Direccion'],
-        json["Numero"] as int, json["token"]);
+    return justGeneralInfo(json['Nombre'] as String,
+        json['Direccion'].cast<String>(), json["Numero"] as int, json["token"]);
   }
   Map toJson() => {
         'Nombre': nombre,

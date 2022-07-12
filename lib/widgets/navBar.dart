@@ -94,7 +94,7 @@ Drawer drawer(BuildContext context) {
               color: Colors.white,
             ),
             onTap: () {
-              launchUrlString("https://www.instagram.com/sirena.de.sal/",
+              launchUrlString("https://www.instagram.com/icma_cz/",
                   mode: LaunchMode.externalApplication);
             },
             title: Text(
@@ -112,7 +112,8 @@ Drawer drawer(BuildContext context) {
               color: Colors.white,
             ),
             onTap: () {
-              launchUrlString("https://www.facebook.com/Sirenaadesal/",
+              launchUrlString(
+                  "https://www.facebook.com/profile.php?id=100071020345077",
                   mode: LaunchMode.externalApplication);
             },
             title: Text(

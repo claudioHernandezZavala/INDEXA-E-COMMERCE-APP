@@ -34,15 +34,13 @@ class _Agregar_productoState extends State<Agregar_producto> {
   List<String> categoriasElegir = [];
   bool isUploading = false;
   int sehanSubido = 0;
+  bool llevaISV = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Agregar producto"),
-        foregroundColor: color3,
-        backgroundColor: color2,
-        titleTextStyle: styleLetrasAppBar,
       ),
       body: isUploading
           ? cargando()
@@ -167,17 +165,61 @@ class _Agregar_productoState extends State<Agregar_producto> {
                         ),
                       ),
                       Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: SearchField(
-                              searchInputDecoration:
-                                  InputStyle("Presionar para elegir categoria"),
-                              validator: (value) {
-                                return value!.isEmpty
-                                    ? "Una categoria es requerida"
-                                    : null;
-                              },
-                              controller: categoria,
-                              suggestions: widget.list)),
+                        padding: const EdgeInsets.all(16.0),
+                        child: SearchField(
+                            searchInputDecoration:
+                                InputStyle("Presionar para elegir categoria"),
+                            validator: (value) {
+                              return value!.isEmpty
+                                  ? "Una categoria es requerida"
+                                  : null;
+                            },
+                            controller: categoria,
+                            suggestions: widget.list),
+                      ),
+                      llevaISV
+                          ? Card(
+                              color: Colors.yellow.withOpacity(0.6),
+                              shadowColor: Colors.red,
+                              elevation: 15,
+                              margin: const EdgeInsets.all(15),
+                              child: Container(
+                                padding: const EdgeInsets.all(25),
+                                child: const Text(
+                                    "El precio ingresado debe llevar el impuesto! En las cotizaciones el producto tendra ISV y no EXE"),
+                              ),
+                            )
+                          : const SizedBox(),
+                      Card(
+                        margin: const EdgeInsets.all(15),
+                        shadowColor: Colors.blue,
+                        elevation: 15,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15)),
+                        child: Container(
+                          padding: const EdgeInsets.all(15),
+                          child: Column(
+                            children: [
+                              const Text("Este producto incluye impuesto?"),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  const Text("No"),
+                                  Switch(
+                                      value: llevaISV,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          llevaISV = value;
+                                        });
+                                      }),
+                                  const Text("Si")
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                       Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: TextFormField(
@@ -307,6 +349,7 @@ class _Agregar_productoState extends State<Agregar_producto> {
       "descripcion": descripcion,
       "precio": precio,
       "nombre": nombre,
+      "isv": llevaISV,
       "material": material,
       "categoria": categoriaSubir
     };

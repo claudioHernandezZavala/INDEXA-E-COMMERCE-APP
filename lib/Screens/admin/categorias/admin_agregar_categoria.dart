@@ -98,7 +98,7 @@ class _AdminAgregarCategoriaState extends State<AdminAgregarCategoria> {
                       },
                       child: Text(
                         "Subir nueva categoria",
-                        style: estiloLetras20,
+                        style: TextStyle(color: Colors.black, fontSize: 20),
                       )),
                 ),
               )

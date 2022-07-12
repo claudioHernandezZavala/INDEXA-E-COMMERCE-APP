@@ -24,7 +24,6 @@ class _PanelProductosState extends State<PanelProductos> {
         foregroundColor: Colors.black,
         title: Text("Tus productos", style: styleLetrasAppBar),
         centerTitle: true,
-        backgroundColor: color2,
       ),
       body: Column(
         children: [

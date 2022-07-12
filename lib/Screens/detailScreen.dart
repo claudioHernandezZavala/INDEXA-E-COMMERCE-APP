@@ -221,7 +221,7 @@ class _DetailScreenState extends State<DetailScreen> {
                           ),
                           Text(
                             "Lps. ${widget.prod.precio.toStringAsFixed(2)}",
-                            style: estiloLetras22,
+                            style: Theme.of(context).textTheme.bodyMedium,
                           )
                         ],
                       ),
@@ -230,7 +230,7 @@ class _DetailScreenState extends State<DetailScreen> {
                       ),
                       Text(
                         "Material: ${widget.prod.material}",
-                        style: estiloLetras22,
+                        style: Theme.of(context).textTheme.bodyMedium,
                       ),
                       const SizedBox(
                         height: 10,

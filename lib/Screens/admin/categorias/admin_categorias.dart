@@ -24,7 +24,7 @@ class _PanelCategoriasState extends State<PanelCategorias> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Categorias"),
-        backgroundColor: color2,
+        backgroundColor: color3,
         centerTitle: true,
         titleTextStyle: styleLetrasAppBar,
         foregroundColor: color3,

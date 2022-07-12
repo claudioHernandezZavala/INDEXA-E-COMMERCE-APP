@@ -8,25 +8,23 @@ import '../../../clases/pedido.dart';
 import '../../../constants.dart';
 import '../../../funciones/funciones_firebase.dart';
 
-class ScreenPedidoInfo extends StatefulWidget {
-  final pedido pedidoVer;
-  const ScreenPedidoInfo({Key? key, required this.pedidoVer}) : super(key: key);
+class ScreenCotizaInfo extends StatefulWidget {
+  final cotiza cotizaVer;
+  const ScreenCotizaInfo({Key? key, required this.cotizaVer}) : super(key: key);
 
   @override
-  State<ScreenPedidoInfo> createState() => _ScreenPedidoInfoState();
+  State<ScreenCotizaInfo> createState() => _ScreenCotizaInfoState();
 }
 
-class _ScreenPedidoInfoState extends State<ScreenPedidoInfo> {
+class _ScreenCotizaInfoState extends State<ScreenCotizaInfo> {
   int currentStep = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: color1,
       appBar: AppBar(
-        title: const Text("Informacion de pedido"),
+        title: const Text("Informacion de cotiza"),
         centerTitle: true,
-        backgroundColor: color2,
-        foregroundColor: color3,
-        titleTextStyle: styleLetrasAppBar,
       ),
       body: ListView(
         children: [
@@ -37,9 +35,9 @@ class _ScreenPedidoInfoState extends State<ScreenPedidoInfo> {
             height: 15,
           ),
           Text(
-            "ID DE PEDIDO",
+            "ID de cotiza",
             textAlign: TextAlign.center,
-            style: estiloLetras18,
+            style: Theme.of(context).textTheme.bodyMedium,
           ),
           Center(
               child: Row(
@@ -52,15 +50,15 @@ class _ScreenPedidoInfoState extends State<ScreenPedidoInfo> {
                     border: Border.all(color: color3, width: 2)),
                 width: 250,
                 child: Text(
-                  widget.pedidoVer.idPedido,
-                  style: estiloLetras18,
+                  widget.cotizaVer.idPedido,
+                  style: Theme.of(context).textTheme.bodyMedium,
                   maxLines: 3,
                   softWrap: true,
                 ),
               ),
               IconButton(
                 onPressed: () {
-                  FlutterClipboard.copy(widget.pedidoVer.idPedido)
+                  FlutterClipboard.copy(widget.cotizaVer.idPedido)
                       .then((value) {
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         content: Text("ID copiado en el portapapeles")));
@@ -82,12 +80,12 @@ class _ScreenPedidoInfoState extends State<ScreenPedidoInfo> {
                 color: color3,
               ),
               title: Text(
-                "Fecha del pedido:",
-                style: estiloLetras20,
+                "Fecha del cotiza:",
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
               subtitle: Text(
-                widget.pedidoVer.fechaPedido,
-                style: estiloLetras18,
+                widget.cotizaVer.fechaPedido,
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
             ),
           ),
@@ -101,8 +99,8 @@ class _ScreenPedidoInfoState extends State<ScreenPedidoInfo> {
                 color: color3,
               ),
               title: Text(
-                "Items del pedido",
-                style: estiloLetras20,
+                "Items de la cotiza",
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
             ),
           ),
@@ -110,10 +108,10 @@ class _ScreenPedidoInfoState extends State<ScreenPedidoInfo> {
             margin: const EdgeInsets.only(left: 25, right: 25),
             width: double.infinity,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(25), color: color2),
+                borderRadius: BorderRadius.circular(25), color: color3),
             child: Column(
               children: [
-                ...widget.pedidoVer.itemsGenerator1(),
+                ...widget.cotizaVer.itemsGenerator1(),
               ],
             ),
           ),
@@ -124,11 +122,11 @@ class _ScreenPedidoInfoState extends State<ScreenPedidoInfo> {
             child: ListTile(
               leading: Icon(
                 Icons.person,
-                color: color3,
+                color: color1,
               ),
               title: Text(
                 "Informacion del cliente",
-                style: estiloLetras20,
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
             ),
           ),
@@ -136,39 +134,39 @@ class _ScreenPedidoInfoState extends State<ScreenPedidoInfo> {
             width: double.infinity,
             margin: const EdgeInsets.only(left: 25, right: 25),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(25), color: color2),
+                borderRadius: BorderRadius.circular(25), color: color3),
             child: Column(
               children: [
                 ListTile(
                   leading: Icon(
                     Icons.text_fields,
-                    color: color3,
+                    color: color1,
                   ),
                   title: Text(
-                    "Nombre:  ${widget.pedidoVer.infoUsuario.nombre}",
-                    style: estiloLetras18,
+                    "Nombre:  ${widget.cotizaVer.infoUsuario.nombre}",
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ),
                 ListTile(
                   leading: Icon(
                     Icons.numbers,
-                    color: color3,
+                    color: color1,
                   ),
                   title: Text(
-                    "Numero: ${widget.pedidoVer.infoUsuario.numero}",
-                    style: estiloLetras18,
+                    "Numero: ${widget.cotizaVer.infoUsuario.numero}",
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ),
                 ListTile(
                   leading: Icon(
                     Icons.map,
-                    color: color3,
+                    color: color1,
                   ),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15)),
                   title: Text(
-                    "Direccion: ${widget.pedidoVer.infoUsuario.direccion}",
-                    style: estiloLetras18,
+                    "Direccion: ${widget.cotizaVer.infoUsuario.direccion}",
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ),
               ],
@@ -181,8 +179,8 @@ class _ScreenPedidoInfoState extends State<ScreenPedidoInfo> {
                 color: color3,
               ),
               title: Text(
-                "Detalles extras sobre el  pedido",
-                style: estiloLetras20,
+                "Detalles extras sobre la cotiza",
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
             ),
           ),
@@ -195,12 +193,12 @@ class _ScreenPedidoInfoState extends State<ScreenPedidoInfo> {
               ),
               title: Text(
                 "Instrucciones extras del comprador:",
-                style: estiloLetras18,
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
-              subtitle: Text(
-                widget.pedidoVer.detallesExtras,
-                style: style1,
-              ),
+              // subtitle: Text(
+              //   // widget.pedidoVer.detallesExtras,
+              //   style: style1,
+              // ),
             ),
           ),
           Container(
@@ -213,9 +211,9 @@ class _ScreenPedidoInfoState extends State<ScreenPedidoInfo> {
               ),
               title: Text(
                 "Cupon utilizado:",
-                style: estiloLetras18,
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
-              subtitle: Text(widget.pedidoVer.cuponUtilizado),
+              // subtitle: Text(widget.pedidoVer.cuponUtilizado),
             ),
           ),
           const SizedBox(
@@ -230,12 +228,12 @@ class _ScreenPedidoInfoState extends State<ScreenPedidoInfo> {
                 size: 45,
               ),
               title: Text(
-                "Total del pedido:",
-                style: estiloLetras18,
+                "Total de la cotiza:",
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
               subtitle: Text(
-                widget.pedidoVer.total.toStringAsFixed(2),
-                style: estiloLetras18Dinero,
+                widget.cotizaVer.total.toStringAsFixed(2),
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
             ),
           ),
@@ -243,10 +241,12 @@ class _ScreenPedidoInfoState extends State<ScreenPedidoInfo> {
             height: 25,
           ),
           SizedBox(
-            height: 200,
+            height: 450,
+            width: 100,
             child: Stepper(
               elevation: 15,
-              type: StepperType.horizontal,
+              margin: EdgeInsets.all(15),
+              type: StepperType.vertical,
               physics: const BouncingScrollPhysics(),
               currentStep: estadoPedido(),
               steps: steps(),
@@ -255,11 +255,11 @@ class _ScreenPedidoInfoState extends State<ScreenPedidoInfo> {
           InkWell(
             onTap: () async {
               final link = WhatsAppUnilink(
-                phoneNumber: '504 ${widget.pedidoVer.infoUsuario.numero}',
-                text: "Hey ,${widget.pedidoVer.infoUsuario.nombre}",
+                phoneNumber: '504 ${widget.cotizaVer.infoUsuario.numero}',
+                text: "Hey ,${widget.cotizaVer.infoUsuario.nombre}",
               );
-              String v = "Hey,${widget.pedidoVer.infoUsuario.nombre}";
-              String numero = "504${widget.pedidoVer.infoUsuario.numero}";
+              String v = "Hey,${widget.cotizaVer.infoUsuario.nombre}";
+              String numero = "504${widget.cotizaVer.infoUsuario.numero}";
               await launchUrl(
                   Uri.parse("whatsapp://send?phone=$numero&text=$v"));
             },
@@ -270,7 +270,7 @@ class _ScreenPedidoInfoState extends State<ScreenPedidoInfo> {
                 children: [
                   Text(
                     "Escribirle por whatsapp",
-                    style: estiloLetras18,
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   const FaIcon(
                     FontAwesomeIcons.whatsapp,
@@ -292,10 +292,10 @@ class _ScreenPedidoInfoState extends State<ScreenPedidoInfo> {
             children: [
               TextButton.icon(
                   onPressed: () async {
-                    await widget.pedidoVer.referencia
+                    await widget.cotizaVer.referencia
                         .update({"enProgreso": true}).then((value) {
                       setState(() {
-                        widget.pedidoVer.enProgreso = true;
+                        widget.cotizaVer.enProgreso = true;
                       });
                     });
                   },
@@ -308,13 +308,13 @@ class _ScreenPedidoInfoState extends State<ScreenPedidoInfo> {
                             borderRadius: BorderRadius.circular(25))),
                   ),
                   label: Text(
-                    "Poner pedido en progreso",
-                    style: estiloLetras18,
+                    "Poner cotiza como revisada",
+                    style: Theme.of(context).textTheme.bodyMedium,
                   )),
               TextButton.icon(
                   onPressed: () async {
-                    sendPushMessage(widget.pedidoVer.infoUsuario.nombre,
-                        widget.pedidoVer.infoUsuario.token);
+                    sendPushMessage(widget.cotizaVer.infoUsuario.nombre,
+                        widget.cotizaVer.infoUsuario.token);
                   },
                   icon: const Icon(Icons.check_box, color: Colors.white),
                   style: ButtonStyle(
@@ -325,15 +325,15 @@ class _ScreenPedidoInfoState extends State<ScreenPedidoInfo> {
                             borderRadius: BorderRadius.circular(25))),
                   ),
                   label: Text(
-                    "Pedido terminado",
-                    style: estiloLetras18,
+                    "Notificar sobre Cotiza confirmada",
+                    style: Theme.of(context).textTheme.bodyMedium,
                   )),
               TextButton.icon(
                   onPressed: () async {
-                    await widget.pedidoVer.referencia
+                    await widget.cotizaVer.referencia
                         .update({"entregado": true}).then((value) {
                       setState(() {
-                        widget.pedidoVer.entregado = true;
+                        widget.cotizaVer.entregado = true;
                       });
                     });
                   },
@@ -346,18 +346,18 @@ class _ScreenPedidoInfoState extends State<ScreenPedidoInfo> {
                             borderRadius: BorderRadius.circular(25))),
                   ),
                   label: Text(
-                    "Pedido entregado",
-                    style: estiloLetras18,
+                    "Cotiza confirmada",
+                    style: Theme.of(context).textTheme.bodyMedium,
                   )),
               TextButton.icon(
                   onPressed: () async {
-                    await widget.pedidoVer.referencia.update({
-                      "entregado": false,
-                      "enProgreso": true,
+                    await widget.cotizaVer.referencia.update({
+                      "confirmada": false,
+                      "revisada": true,
                     }).then((value) {
                       setState(() {
-                        widget.pedidoVer.entregado = false;
-                        widget.pedidoVer.enProgreso = true;
+                        widget.cotizaVer.entregado = false;
+                        widget.cotizaVer.enProgreso = true;
                       });
                     });
                   },
@@ -371,20 +371,20 @@ class _ScreenPedidoInfoState extends State<ScreenPedidoInfo> {
                             borderRadius: BorderRadius.circular(25))),
                   ),
                   label: Text(
-                    "Revertir a en progreso",
-                    style: estiloLetras18,
+                    "Revertir a revisada",
+                    style: Theme.of(context).textTheme.bodyMedium,
                   )),
               TextButton.icon(
                   onPressed: () async {
-                    await widget.pedidoVer.referencia.update({
+                    await widget.cotizaVer.referencia.update({
                       "entregado": false,
                       "enProgreso": false,
                       "recibido": true
                     }).then((value) {
                       setState(() {
-                        widget.pedidoVer.recibido = true;
-                        widget.pedidoVer.enProgreso = false;
-                        widget.pedidoVer.entregado = false;
+                        widget.cotizaVer.recibido = true;
+                        widget.cotizaVer.enProgreso = false;
+                        widget.cotizaVer.entregado = false;
                       });
                     });
                   },
@@ -399,11 +399,11 @@ class _ScreenPedidoInfoState extends State<ScreenPedidoInfo> {
                   ),
                   label: Text(
                     "Revertir a recibido",
-                    style: estiloLetras18,
+                    style: Theme.of(context).textTheme.bodyMedium,
                   )),
               TextButton.icon(
                   onPressed: () {
-                    widget.pedidoVer.referencia.delete();
+                    widget.cotizaVer.referencia.delete();
                     Navigator.of(context).pop();
                   },
                   style: ButtonStyle(
@@ -418,8 +418,8 @@ class _ScreenPedidoInfoState extends State<ScreenPedidoInfo> {
                     color: Colors.white,
                   ),
                   label: Text(
-                    "Cancelar pedido",
-                    style: estiloLetras18,
+                    "Cancelar Cotiza",
+                    style: Theme.of(context).textTheme.bodyMedium,
                   )),
             ],
           ),
@@ -430,20 +430,20 @@ class _ScreenPedidoInfoState extends State<ScreenPedidoInfo> {
 
   int estadoPedido() {
     int estado = 0;
-    if (widget.pedidoVer.recibido) {
+    if (widget.cotizaVer.recibido) {
       setState(() {
         estado = 0;
         currentStep = 0;
       });
     }
-    if (widget.pedidoVer.enProgreso) {
+    if (widget.cotizaVer.enProgreso) {
       setState(() {
         estado = 1;
 
         currentStep = 1;
       });
     }
-    if (widget.pedidoVer.entregado) {
+    if (widget.cotizaVer.entregado) {
       setState(() {
         estado = 2;
 
@@ -458,19 +458,37 @@ class _ScreenPedidoInfoState extends State<ScreenPedidoInfo> {
     return [
       Step(
           isActive: currentStep >= 0,
-          title: const Text("Recibido"),
+          title: Text(
+            "Recibido",
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
           state: StepState.indexed,
-          content: const Text("El administrado recibio el pedido")),
+          content: Text(
+            "El administrador recibio la cotiza",
+            style: Theme.of(context).textTheme.bodyMedium,
+          )),
       Step(
           isActive: currentStep >= 1,
           state: StepState.editing,
-          title: const Text("En progreso"),
-          content: const Text("Tu pedido se esta procesando")),
+          title: Text(
+            "Revisada",
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
+          content: Text(
+            "La cotiza se reviso",
+            style: Theme.of(context).textTheme.bodyMedium,
+          )),
       Step(
           isActive: currentStep >= 2,
           state: StepState.complete,
-          title: const Text("Entregado"),
-          content: const Text("Tu pedido fue entregado")),
+          title: Text(
+            "Confirmada",
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
+          content: Text(
+            "La cotiza fue confirmada",
+            style: Theme.of(context).textTheme.bodyMedium,
+          )),
     ];
   }
 }

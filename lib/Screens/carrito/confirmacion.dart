@@ -125,7 +125,7 @@ class _ConfirmacionState extends State<Confirmacion> {
                           Text(
                             "Pulsa para modificar informacion de tu perfil!",
                             textAlign: TextAlign.center,
-                            style: estiloLetras18,
+                            style: Theme.of(context).textTheme.bodyMedium,
                           )
                         ],
                       ),

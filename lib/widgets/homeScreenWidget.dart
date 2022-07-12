@@ -1,8 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:indexa/Screens/allProducts.dart';
+import 'package:indexa/Screens/all_Categories.dart';
 import 'package:indexa/widgets/productosNuevosWidget.dart';
 
-import '../Screens/allProducts.dart';
 import '../clases/categoria.dart';
 import '../clases/descuentos.dart';
 import '../clases/producto.dart';
@@ -45,9 +46,11 @@ class _HomeWidgetState extends State<HomeWidget> {
           children: [
             InkWell(
               onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) =>
-                        const AllProducts(categoria: 'none')));
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => const AllCategories(),
+                  ),
+                );
               },
               child: Container(
                 margin: const EdgeInsets.only(right: 20, bottom: 15, top: 15),
@@ -76,12 +79,12 @@ class _HomeWidgetState extends State<HomeWidget> {
               child: StreamBuilder(
                   stream: FirebaseFirestore.instance
                       .collection("categorias/")
-                      .limit(5)
+                      .limit(4)
                       .snapshots(),
                   builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return CircularProgressIndicator(
-                        color: color2,
+                        color: color3,
                       );
                     }
                     if (snapshot.connectionState == ConnectionState.done &&
@@ -115,7 +118,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                           ),
                           Text(
                             "No hay categorias por ahora",
-                            style: estiloLetras18,
+                            style: Theme.of(context).textTheme.bodyMedium,
                           )
                         ],
                       );
@@ -146,8 +149,9 @@ class _HomeWidgetState extends State<HomeWidget> {
               height: 1,
             ),
             descuentos.isNotEmpty
-                ? const Text(
+                ? Text(
                     "Descuentos disponibles",
+                    style: Theme.of(context).textTheme.bodyMedium,
                     textAlign: TextAlign.center,
                   )
                 : const SizedBox(),
@@ -205,13 +209,53 @@ class _HomeWidgetState extends State<HomeWidget> {
             const SizedBox(
               height: 5,
             ),
-            const Text("Productos nuevos", textAlign: TextAlign.center),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                const Text("Productos nuevos", textAlign: TextAlign.center),
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            const AllProducts(categoria: "none"),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    margin:
+                        const EdgeInsets.only(right: 20, bottom: 15, top: 15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text(
+                          "Todos los productos",
+                          textAlign: TextAlign.right,
+                          style: TextStyle(
+                            color: color4,
+                            fontSize: 18,
+                          ),
+                        ),
+                        Icon(
+                          Icons.arrow_right_alt,
+                          color: color3,
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                // IconButton(
+                //   onPressed: () {},
+                //   icon: Icon(Icons.arrow_forward_ios_outlined),
+                // ),
+              ],
+            ),
 
             StreamBuilder(
                 stream: FirebaseFirestore.instance
                     .collection("productos/")
                     .orderBy("nombre")
-                    .limitToLast(10)
+                    .limitToLast(5)
                     .snapshots(),
                 builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
                   if (snapshot.hasError) {
@@ -237,7 +281,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                         ),
                         Text(
                           "No hay productos por ahora",
-                          style: estiloLetras22,
+                          style: Theme.of(context).textTheme.bodyMedium,
                         )
                       ],
                     );

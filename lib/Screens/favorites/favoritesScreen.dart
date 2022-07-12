@@ -82,7 +82,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                               ),
                               Text(
                                 "No tienes favoritos aun!",
-                                style: estiloLetras20,
+                                style: Theme.of(context).textTheme.bodyMedium,
                               )
                             ],
                           ),

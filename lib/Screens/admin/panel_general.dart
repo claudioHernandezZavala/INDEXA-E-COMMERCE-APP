@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:indexa/Screens/admin/pedidos/admin_pedidos.dart';
+import 'package:indexa/Screens/admin/pedidos/admin_cotiza.dart';
 
 import '../../bounciPageRoute.dart';
 import '../../constants.dart';
@@ -22,16 +22,14 @@ class PanelGeneral extends StatelessWidget {
           "Panel",
           style: styleLetrasAppBar,
         ),
-        centerTitle: true,
-        backgroundColor: color2,
-        foregroundColor: color3,
       ),
       body: GridView.count(
         crossAxisCount: 2,
         children: [
           GestureDetector(
             onTap: () {
-              Navigator.of(context).push(BouncyPageRoute(const PanelProductos()));
+              Navigator.of(context)
+                  .push(BouncyPageRoute(const PanelProductos()));
             },
             child: Container(
               margin: const EdgeInsets.all(15),
@@ -74,7 +72,8 @@ class PanelGeneral extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              Navigator.of(context).push(BouncyPageRoute(const PanelDescuentos()));
+              Navigator.of(context)
+                  .push(BouncyPageRoute(const PanelDescuentos()));
             },
             child: Container(
               margin: const EdgeInsets.all(15),
@@ -114,7 +113,8 @@ class PanelGeneral extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              Navigator.of(context).push(BouncyPageRoute(const PanelCategorias()));
+              Navigator.of(context)
+                  .push(BouncyPageRoute(const PanelCategorias()));
             },
             child: Container(
               margin: const EdgeInsets.all(15),
@@ -154,7 +154,7 @@ class PanelGeneral extends StatelessWidget {
           ),
           InkWell(
             onTap: () {
-              Navigator.of(context).push(BouncyPageRoute(const AdminPedidos()));
+              Navigator.of(context).push(BouncyPageRoute(const AdminCotiza()));
             },
             child: Container(
               margin: const EdgeInsets.all(15),
@@ -185,7 +185,7 @@ class PanelGeneral extends StatelessWidget {
                     size: 35,
                   ),
                   Text(
-                    "Pedidos",
+                    "Cotizas",
                     style: TextStyle(fontSize: 20, color: Colors.white),
                   )
                 ],

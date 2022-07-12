@@ -49,7 +49,7 @@ class _RegisterPageState extends State<RegisterPage> {
       body: SafeArea(
         child: Stack(
           children: [
-            VideoPlayer(_controller),
+            // VideoPlayer(_controller),
             SingleChildScrollView(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -82,7 +82,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               children: [
                                 Text(
                                   "Bienvenido",
-                                  style: estiloLetras22,
+                                  style: Theme.of(context).textTheme.bodyMedium,
                                 ),
                                 const SizedBox(
                                   height: 5,
@@ -121,7 +121,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                                 color3)),
                                     icon: Icon(
                                       Icons.lock_open,
-                                      color: color2,
+                                      color: color3,
                                     ),
                                     label: const Text(
                                       "Registrarse",
@@ -135,8 +135,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                 Text(
                                   "O registrate con google",
                                   style: height <= 700
-                                      ? estiloLetras18
-                                      : estiloLetras20,
+                                      ? Theme.of(context).textTheme.bodySmall
+                                      : Theme.of(context).textTheme.bodyMedium,
                                 ),
                                 Container(
                                     margin: const EdgeInsets.all(10),
@@ -168,7 +168,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                                 color3)),
                                     icon: Icon(
                                       Icons.assignment_ind_sharp,
-                                      color: color2,
+                                      color: color3,
                                     ),
                                     label: const Text(
                                       "Iniciar sesion",

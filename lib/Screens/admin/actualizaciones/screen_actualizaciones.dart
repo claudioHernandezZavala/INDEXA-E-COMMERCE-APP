@@ -20,8 +20,6 @@ class _ScreenActualizacionesState extends State<ScreenActualizaciones> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Anunciar una nueva actualizacion"),
-        titleTextStyle: estiloLetras20,
-        backgroundColor: color2,
       ),
       body: Form(
         child: Column(
@@ -30,7 +28,7 @@ class _ScreenActualizacionesState extends State<ScreenActualizaciones> {
               margin: const EdgeInsets.all(25),
               child: Text(
                 "Agrega el texto que quieres que los usuarios reciban",
-                style: estiloLetras20,
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
             ),
             TextFormField(

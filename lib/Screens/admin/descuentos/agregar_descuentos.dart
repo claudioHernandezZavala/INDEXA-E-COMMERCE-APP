@@ -29,7 +29,7 @@ class _AgregarDescuentoState extends State<AgregarDescuento> {
       appBar: AppBar(
         title: const Text("Agregar descuentos"),
         centerTitle: true,
-        backgroundColor: color2,
+        backgroundColor: color3,
         foregroundColor: color3,
         titleTextStyle: styleLetrasAppBar,
       ),
@@ -94,7 +94,7 @@ class _AgregarDescuentoState extends State<AgregarDescuento> {
                           const TextStyle(color: Colors.white, fontSize: 18),
                       floatingLabelStyle: TextStyle(
                           color: Colors.black,
-                          backgroundColor: color2,
+                          backgroundColor: color3,
                           fontSize: 20,
                           fontWeight: FontWeight.bold),
                       fillColor: color3,
@@ -136,7 +136,7 @@ class _AgregarDescuentoState extends State<AgregarDescuento> {
                           const TextStyle(color: Colors.white, fontSize: 18),
                       floatingLabelStyle: TextStyle(
                           color: Colors.black,
-                          backgroundColor: color2,
+                          backgroundColor: color3,
                           fontSize: 20,
                           fontWeight: FontWeight.bold),
                       fillColor: color3,
