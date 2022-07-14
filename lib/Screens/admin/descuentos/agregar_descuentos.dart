@@ -28,10 +28,6 @@ class _AgregarDescuentoState extends State<AgregarDescuento> {
       backgroundColor: color1,
       appBar: AppBar(
         title: const Text("Agregar descuentos"),
-        centerTitle: true,
-        backgroundColor: color3,
-        foregroundColor: color3,
-        titleTextStyle: styleLetrasAppBar,
       ),
       body: ListView(
         children: [

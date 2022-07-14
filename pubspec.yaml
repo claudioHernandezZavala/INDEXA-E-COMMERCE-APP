@@ -57,7 +57,6 @@ dependencies:
   shimmer: ^2.0.0
   flutter_local_notifications: ^9.5.0
   firebase_messaging: ^11.3.0
-  liquid_swipe: ^2.1.1
   pdf: ^3.7.4
   syncfusion_flutter_pdfviewer: ^20.1.52-beta
   permission_handler: ^10.0.0
@@ -76,6 +75,8 @@ dependencies:
   selectable_container: ^1.0.3
   syncfusion_flutter_xlsio: ^20.1.61-beta
   path_provider: ^2.0.11
+  intro_screen_onboarding_flutter: ^1.0.0
+  flutter_email_sender: ^5.1.0
 
 
 dev_dependencies:
@@ -88,6 +89,14 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/logoINDEXA.jpg"
+flutter_native_splash:
+  color: "#ffffff"
+  image: "assets/logoINDEXAsplash.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

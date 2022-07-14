@@ -46,7 +46,7 @@ class NoUserWidget extends StatelessWidget {
                   children: [
                     const Material(
                       child: Text(
-                        "Sign in for more fun!",
+                        "Inicia sesion para mas funciones!",
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 15),
                       ),

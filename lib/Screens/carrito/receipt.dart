@@ -1,4 +1,8 @@
+import 'dart:io';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ticket_widget/ticket_widget.dart';
@@ -16,6 +20,7 @@ class Recibo extends StatefulWidget {
   final double descuento;
   final double total;
   final String cupon;
+
   final justGeneralInfo info;
   final String idPedido;
   final List<ItemsCarrito> items;
@@ -37,7 +42,7 @@ class Recibo extends StatefulWidget {
 
 class _ReciboState extends State<Recibo> {
   List<invoiceItem> invoiceItems = [];
-
+  late File pdfForEmail;
   @override
   void initState() {
     // TODO: implement initState
@@ -46,7 +51,8 @@ class _ReciboState extends State<Recibo> {
       invoiceItems.add(invoiceItem(
           nombre: element.nombre,
           cantidad: element.cantidadProducto,
-          precio: element.precio));
+          precio: element.precio,
+          impuesto: element.impuesto));
     }
     for (var element in widget.items) {
       element.referenciaItemCarrito.delete();
@@ -79,6 +85,18 @@ class _ReciboState extends State<Recibo> {
                         backgroundColor:
                             MaterialStateProperty.all<Color?>(color3)),
                     onPressed: () async {
+                      generatePDF();
+                    },
+                    child: const Text(
+                      "Descargar cotizacion en pdf",
+                      style: TextStyle(color: Colors.white),
+                    )),
+                TextButton(
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all<Color?>(color3)),
+                    onPressed: () async {
+                      Email email;
                       Invoice invoice;
                       invoice = Invoice(
                           descuento: widget.descuento,
@@ -91,18 +109,28 @@ class _ReciboState extends State<Recibo> {
                               invoiceDate: DateTime.now(),
                               dueDate: DateTime.now(),
                               invoiceId: widget.idPedido));
-                      await PdfInvoiceApi.generate(invoice, widget.descuento,
+                      PdfInvoiceApi.generate(invoice, widget.descuento,
                               widget.total, widget.idPedido)
-                          .whenComplete(() {
+                          .then((value) async {
+                        email = Email(
+                          body:
+                              'Buen dia,en el presente correo se adjunta cotizacion generada por correo.\n\nEl id de esta cotiza es: ${widget.idPedido}.\nLas cotizaciones deben ser confirmadas antes de poder ser aprobadas por su parte debido a posibles precios no actualizados',
+                          subject: 'Cotizacion INDEXA app',
+                          recipients: [
+                            '${FirebaseAuth.instance.currentUser?.email}'
+                          ],
+                          attachmentPaths: [(value.path)],
+                          isHTML: true,
+                        );
+                        await FlutterEmailSender.send(email);
+                      }).whenComplete(() async {
                         Fluttertoast.showToast(
                             msg: "PDF descargado en carpeta descargas",
                             backgroundColor: Colors.green);
                       });
-
-                      //createAndSaveExcel();
                     },
                     child: const Text(
-                      "Descargar cotizacion en pdf",
+                      "Mandar cotiza a mi correo",
                       style: TextStyle(color: Colors.white),
                     )),
                 const SizedBox(
@@ -206,26 +234,6 @@ class _ReciboState extends State<Recibo> {
                                     fontSize: 18),
                               ),
                             ),
-                            /*
-                            Padding(
-                              padding: const EdgeInsets.only(left: 40, top: 25),
-                              child: Text(
-                                "Cupon aplicado",
-                                style: style,
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 40, top: 15),
-                              child: Text(
-                                widget.cupon,
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black,
-                                    fontSize: 18),
-                              ),
-                            ),
-
-                             */
                           ],
                         ),
                       ],
@@ -236,6 +244,31 @@ class _ReciboState extends State<Recibo> {
             ),
           ),
         ));
+  }
+
+  void generatePDF() async {
+    File v;
+    Invoice invoice;
+    invoice = Invoice(
+        descuento: widget.descuento,
+        customerInfo: Customer(
+            Direccion: "Direccion: ${widget.info.direccion}",
+            nombre: widget.info.nombre),
+        items: invoiceItems,
+        invoiceInfo: InvoiceInfo(
+            extraDescription: widget.extra,
+            invoiceDate: DateTime.now(),
+            dueDate: DateTime.now(),
+            invoiceId: widget.idPedido));
+    PdfInvoiceApi.generate(
+            invoice, widget.descuento, widget.total, widget.idPedido)
+        .then((value) {
+      v = value;
+    }).whenComplete(() {
+      Fluttertoast.showToast(
+          msg: "PDF descargado en carpeta descargas",
+          backgroundColor: Colors.green);
+    });
   }
 }
 

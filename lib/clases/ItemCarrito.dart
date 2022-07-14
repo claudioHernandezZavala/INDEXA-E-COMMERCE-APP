@@ -6,10 +6,17 @@ class ItemsCarrito {
   String imagen, nombre;
   double precio;
   int cantidadProducto;
+  bool impuesto;
   DocumentReference referenciaItemCarrito;
 
-  ItemsCarrito(this.referenciaAProducto, this.cantidadProducto,
-      this.referenciaItemCarrito, this.nombre, this.precio, this.imagen);
+  ItemsCarrito(
+      this.referenciaAProducto,
+      this.cantidadProducto,
+      this.referenciaItemCarrito,
+      this.nombre,
+      this.precio,
+      this.imagen,
+      this.impuesto);
   Map toJson() {
     return {'Nombre': nombre, 'Cantidad': cantidadProducto};
   }

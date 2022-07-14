@@ -31,6 +31,7 @@ class _ModificaProductoState extends State<ModificaProducto> {
   double precio = 0;
   String nombre = "";
   String material = "";
+  bool llevaISV = false;
   TextEditingController categoria = TextEditingController();
   String categoriaFinal = "categ";
   int tamanioArreglo = 0;
@@ -50,8 +51,6 @@ class _ModificaProductoState extends State<ModificaProducto> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Modificar producto"),
-        foregroundColor: color3,
-        titleTextStyle: styleLetrasAppBar,
       ),
       body: subiendo
           ? cargando()
@@ -75,10 +74,16 @@ class _ModificaProductoState extends State<ModificaProducto> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: const [
-                          Icon(Icons.add_a_photo),
+                          Icon(
+                            Icons.add_a_photo,
+                            color: Colors.white,
+                          ),
                           Padding(
                             padding: EdgeInsets.all(10),
-                            child: Text("Agregar nueva imagen"),
+                            child: Text(
+                              "Agregar nueva imagen",
+                              style: TextStyle(color: Colors.white),
+                            ),
                           ),
                         ],
                       ),
@@ -134,9 +139,13 @@ class _ModificaProductoState extends State<ModificaProducto> {
                                                     });
                                                   }
                                                 },
-                                                iconSize: 25,
-                                                icon: const Icon(Icons.close),
-                                                color: Colors.redAccent,
+                                                iconSize: 35,
+                                                icon: const Icon(
+                                                  Icons.close,
+                                                  size: 35,
+                                                  color: Colors.red,
+                                                ),
+                                                color: Colors.red,
                                               ),
                                             ),
                                           ),
@@ -198,7 +207,7 @@ class _ModificaProductoState extends State<ModificaProducto> {
                                             },
                                             iconSize: 25,
                                             icon: const Icon(Icons.close),
-                                            color: color3,
+                                            color: Colors.red,
                                           ),
                                         ),
                                       ),
@@ -245,6 +254,7 @@ class _ModificaProductoState extends State<ModificaProducto> {
                                       widget.productoModificar.categoria)
                                   : null,
                               searchInputDecoration: InputDecoration(
+                                labelText: "Categoria",
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
                                     color: Colors.black.withOpacity(0.8),
@@ -262,6 +272,52 @@ class _ModificaProductoState extends State<ModificaProducto> {
                               },
                               controller: categoria,
                               suggestions: widget.list)),
+                      llevaISV
+                          ? Card(
+                              color: Colors.yellow.withOpacity(0.6),
+                              shadowColor: Colors.red,
+                              elevation: 15,
+                              margin: const EdgeInsets.all(15),
+                              child: Container(
+                                padding: const EdgeInsets.all(25),
+                                child: const Text(
+                                    "El precio ingresado debe llevar el impuesto! En las cotizaciones el producto tendra ISV y no EXE"),
+                              ),
+                            )
+                          : const SizedBox(),
+                      Card(
+                        margin: const EdgeInsets.all(15),
+                        shadowColor: Colors.blue,
+                        elevation: 15,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15)),
+                        child: Container(
+                          padding: const EdgeInsets.all(15),
+                          child: Column(
+                            children: [
+                              const Text("Este producto incluye impuesto?"),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  const Text("No"),
+                                  Switch(
+                                      value: widget.productoModificar.llevaISV,
+                                      activeColor: Colors.green,
+                                      inactiveThumbColor: Colors.red,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          widget.productoModificar.llevaISV =
+                                              value;
+                                        });
+                                      }),
+                                  const Text("Si")
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                       Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: TextFormField(
@@ -312,18 +368,23 @@ class _ModificaProductoState extends State<ModificaProducto> {
                           },
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 15),
                       Padding(
                         padding: const EdgeInsets.all(15),
-                        child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(16),
-                              color: color3),
-                          child: TextButton(
-                              onPressed: () async {
-                                uploadFunction();
-                              },
-                              child: const Text("Guardar cambios")),
+                        child: GestureDetector(
+                          onTap: () async {
+                            uploadFunction();
+                          },
+                          child: Container(
+                            padding: EdgeInsets.all(25),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(16),
+                                color: color3),
+                            child: const Text(
+                              "Guardar cambios",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
                         ),
                       )
                     ],
@@ -337,56 +398,64 @@ class _ModificaProductoState extends State<ModificaProducto> {
   List<Step> getSteps() => [
         Step(
             isActive: currentStep >= 0,
-            title: const Text("Subiendo imagenes..."),
+            title: const Text("Subiendo imagenes...",
+                style: TextStyle(color: Colors.black)),
             content: Text(
-                "Espera un momento...Se han subido $seHanSubido de las ${sampleImage.length} imagenes seleccionadas ")),
+              "Espera un momento...Se han subido $seHanSubido de las ${sampleImage.length} imagenes seleccionadas ",
+            )),
         Step(
             isActive: currentStep >= 1,
-            title: const Text("Tus imagenes se han subido"),
+            title: const Text("Tus imagenes se han subido",
+                style: TextStyle(color: Colors.black)),
             content:
                 const Text("Presiona continuar para actualizar el producto")),
         Step(
             isActive: currentStep >= 2,
-            title: const Text("Producto subido con exito!"),
+            title: const Text("Producto subido con exito!",
+                style: TextStyle(color: Colors.black)),
             content: const Text("Presiona continuar para volver al panel")),
       ];
 
   Widget cargando() {
     return Center(
-        child: Stepper(
-            currentStep: currentStep,
-            onStepTapped: (index) {
+        child: Container(
+      child: Stepper(
+          elevation: 15,
+          currentStep: currentStep,
+          onStepTapped: (index) {
+            setState(() {
+              currentStep = index;
+            });
+          },
+          onStepContinue: () async {
+            final isBeforeLast = currentStep == getSteps().length - 2;
+            final isLast = currentStep == getSteps().length - 1;
+            if (isBeforeLast) {
+              urls.addAll(widget.productoModificar.imagenes);
+              try {
+                await widget.productoModificar.referencia
+                    .set({
+                      'categoria': categoriaFinal,
+                      'descripcion': descripcion,
+                      'imagenes': urls,
+                      'material': material,
+                      'nombre': nombre,
+                      'precio': precio,
+                      "isv": widget.productoModificar.llevaISV
+                    }, SetOptions(merge: true))
+                    .whenComplete(() => ScaffoldMessenger.of(this.context)
+                        .showSnackBar(snack("Editado con exito")))
+                    .whenComplete(() => Navigator.of(this.context).pop());
+              } catch (e) {}
+            } else if (isLast) {
+            } else {
               setState(() {
-                currentStep = index;
+                currentStep++;
               });
-            },
-            onStepContinue: () async {
-              final isBeforeLast = currentStep == getSteps().length - 2;
-              final isLast = currentStep == getSteps().length - 1;
-              if (isBeforeLast) {
-                urls.addAll(widget.productoModificar.imagenes);
-                try {
-                  await widget.productoModificar.referencia
-                      .set({
-                        'categoria': categoriaFinal,
-                        'descripcion': descripcion,
-                        'imagenes': urls,
-                        'material': material,
-                        'nombre': nombre,
-                        'precio': precio
-                      }, SetOptions(merge: true))
-                      .whenComplete(() => ScaffoldMessenger.of(this.context)
-                          .showSnackBar(snack("Editado con exito")))
-                      .whenComplete(() => Navigator.of(this.context).pop());
-                } catch (e) {}
-              } else if (isLast) {
-              } else {
-                setState(() {
-                  currentStep++;
-                });
-              }
-            },
-            steps: getSteps()));
+            }
+          },
+          steps: getSteps()),
+    ));
   }
 
   void uploadFunction() async {

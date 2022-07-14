@@ -252,8 +252,8 @@ class _PerfilState extends State<Perfil> {
                                                               as infoUser)
                                                           .referencia
                                                           .update({
-                                                        "Numero":
-                                                            numeroNuevo.text
+                                                        "Numero": int.parse(
+                                                            numeroNuevo.text)
                                                       }),
                                                       progress: Lottie.network(
                                                           "https://assets10.lottiefiles.com/packages/lf20_xueypr0w.json"),

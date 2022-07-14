@@ -7,7 +7,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
 
 import '../../../clases/categoria.dart';
-import '../../../constants.dart';
 import '../../../recordatorios/recordatorios.dart';
 
 class ModificarCategoria extends StatefulWidget {
@@ -29,9 +28,6 @@ class _ModificarCategoriaState extends State<ModificarCategoria> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Modificar Categoria"),
-        titleTextStyle: styleLetrasAppBar,
-        foregroundColor: color3,
-        backgroundColor: color3,
       ),
       body: ListView(
         children: [

@@ -21,7 +21,7 @@ class _AdminCotizaState extends State<AdminCotiza> {
     return Scaffold(
       backgroundColor: color1,
       appBar: AppBar(
-        title: const Text("Pedidos"),
+        title: const Text("Cotizaciones"),
         centerTitle: true,
       ),
       body: StreamBuilder(

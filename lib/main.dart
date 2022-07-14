@@ -31,8 +31,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           primarySwatch: Colors.blue,
           backgroundColor: color1,
-          textTheme: const TextTheme(
-            bodyMedium: TextStyle(
+          textTheme: TextTheme(
+            bodyMedium: GoogleFonts.oswald(
               color: Colors.black,
               fontSize: 20,
             ),
@@ -40,6 +40,17 @@ class MyApp extends StatelessWidget {
               color: Colors.white,
               fontSize: 20,
             ),
+          ),
+          inputDecorationTheme: InputDecorationTheme(
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(15),
+              borderSide: const BorderSide(color: Colors.blue, width: 2),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20),
+              borderSide: const BorderSide(color: Colors.green, width: 3),
+            ),
+            filled: true,
           ),
           appBarTheme: AppBarTheme(
               color: color3,

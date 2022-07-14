@@ -20,13 +20,52 @@ class PdfInvoiceApi {
         header,
         SizedBox(height: 35),
         buildInvoice(invoice),
-        buildTotal(invoice, descuento, total)
+        buildTotal(invoice, descuento, total),
+        SizedBox(height: 35),
+        buildDivider(),
+        SizedBox(height: 10),
+        buildBottomBox(),
+        SizedBox(height: 35),
+        buildDividerBottom()
       ],
       //footer: (context) => buildFooter(invoice),
     ));
 
     return PdfApi.saveDocument(name: 'my_invoice$uuid.pdf', pdf: pdf);
   }
+}
+
+Widget buildDivider() {
+  return Container(
+      width: 0.657 * PdfPageFormat.a4.width,
+      height: 5,
+      color: PdfColor.fromHex("233142"));
+}
+
+Widget buildDividerBottom() {
+  return Container(
+      width: 0.85 * PdfPageFormat.a4.width,
+      height: 5,
+      color: PdfColor.fromHex("233142"));
+}
+
+Widget buildBottomBox() {
+  return Container(
+      width: 0.7 * PdfPageFormat.a4.width,
+      decoration:
+          BoxDecoration(border: Border.all(color: PdfColors.black, width: 1)),
+      padding: EdgeInsets.all(20),
+      child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              "Barrio siria calle principal -Tegucigalpa",
+            ),
+            Text("E-mail: indexahonduras@gmail.com"),
+            Text("Teléfono: 2213-3617"),
+            Text("Celular: (504)95882120")
+          ]));
 }
 
 Future<Widget> buildHeader(Invoice invoice) async {
@@ -64,7 +103,7 @@ Widget buildInvoice(Invoice invoice) {
     return [
       '${item.cantidad}',
       item.nombre,
-      "ISV",
+      item.impuesto ? "ISV" : "EXE",
       (item.precio.toStringAsFixed(2)),
       (total.toStringAsFixed(2))
     ];
@@ -82,40 +121,54 @@ Widget buildInvoice(Invoice invoice) {
 }
 
 Widget buildTotal(Invoice invoice, double descuento, double total) {
+  double subtotal = total;
+  int cantImpuesto = 0;
+  double exe = 0;
+  double sub_exe = 0;
+  double isv = 0;
+  double total2 = 0;
+  for (int i = 0; i < invoice.items.length; i++) {
+    if (invoice.items[i].impuesto) {
+      cantImpuesto++;
+    } else {
+      exe += invoice.items[i].precio;
+    }
+  }
+  if (cantImpuesto != 0) {
+    sub_exe = subtotal - exe;
+    isv = (sub_exe * 15) / 100;
+  } else {
+    sub_exe = 0;
+    isv = 0;
+  }
+
   final data2 = [
     [
       "SUBTOTAL",
-      total.toStringAsFixed(2),
+      subtotal.toStringAsFixed(2),
     ],
     [
       "EXE",
-      15.toStringAsFixed(2),
+      exe.toStringAsFixed(2),
     ],
     [
-      "SUB-T",
-      (total - 10).toStringAsFixed(2),
+      "SUB-EXE",
+      sub_exe == 0.toStringAsFixed(2) ? "-" : sub_exe.toStringAsFixed(2)
     ],
-    [
-      "ISV",
-      5.toStringAsFixed(2),
-    ],
+    ["ISV", isv == 0.toStringAsFixed(2) ? "-" : isv.toStringAsFixed(2)],
     [
       "TOTAL",
-      (total + 5).toStringAsFixed(2),
+      cantImpuesto == 0
+          ? subtotal.toStringAsFixed(2)
+          : (subtotal + isv).toStringAsFixed(2),
     ]
-  ];
-  final datatexto = [
-    ["COTIZACIÓN VALIDA POR 3 DÍAS"],
-    ["CRÉDITO 30 DÍAS HÁBILES"],
-    ["ENTREGA GRATUITA A SU OFICINA (VALIDO PARA TEGUCIGALPA)"],
-    ["NO SE ACEPTAN DEVOLUCIONES"]
   ];
 
   return Row(
     children: [
       Container(
-          width: 328,
-          padding: const EdgeInsets.only(bottom: 25, top: 4, left: 5),
+          width: 300,
+          padding: const EdgeInsets.only(bottom: 27, top: 11, left: 5),
           decoration: BoxDecoration(
             border: Border.all(
               color: PdfColors.black,
@@ -136,10 +189,10 @@ Widget buildTotal(Invoice invoice, double descuento, double total) {
       Expanded(
         flex: 4,
         child: Table.fromTextArray(
-          cellAlignment: Alignment.center,
-          data: data2,
-          headerCount: 2,
-        ),
+            cellAlignment: Alignment.center,
+            data: data2,
+            headerCount: 2,
+            cellPadding: EdgeInsets.all(6)),
       ),
 
       /*

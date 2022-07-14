@@ -21,7 +21,6 @@ class _PanelProductosState extends State<PanelProductos> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        foregroundColor: Colors.black,
         title: Text("Tus productos", style: styleLetrasAppBar),
         centerTitle: true,
       ),

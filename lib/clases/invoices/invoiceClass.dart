@@ -28,6 +28,10 @@ class invoiceItem {
   String nombre;
   double precio;
   int cantidad;
+  bool impuesto;
   invoiceItem(
-      {required this.nombre, required this.precio, required this.cantidad});
+      {required this.nombre,
+      required this.precio,
+      required this.cantidad,
+      required this.impuesto});
 }

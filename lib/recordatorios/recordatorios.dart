@@ -12,6 +12,7 @@ class recordatorio extends StatelessWidget {
     return Card(
       color: Colors.blue.shade50,
       shadowColor: Colors.orange,
+      margin: EdgeInsets.all(15),
       elevation: 20,
       child: Row(
         children: [
@@ -27,9 +28,9 @@ class recordatorio extends StatelessWidget {
           ),
           Expanded(
             child: SizedBox(
-              height: 100,
+              height: 150,
               child: Padding(
-                padding: const EdgeInsets.only(top: 15.0),
+                padding: const EdgeInsets.all(15.0),
                 child: Text(
                   recordatorio_texto,
                 ),

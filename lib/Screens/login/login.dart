@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:indexa/Screens/login/register.dart';
-import 'package:video_player/video_player.dart';
 
 import '../../backend/authServices.dart';
 import '../../bounciPageRoute.dart';
@@ -18,26 +17,26 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   TextEditingController eController = TextEditingController();
   TextEditingController pController = TextEditingController();
-  late VideoPlayerController _controller;
+  // late VideoPlayerController _controller;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _controller = VideoPlayerController.asset("assets/video.mp4")
-      ..initialize().then((value) {
-        _controller.setVolume(0);
-        _controller.play();
-
-        _controller.setLooping(true);
-        setState(() {});
-      });
+    // _controller = VideoPlayerController.asset("assets/video.mp4")
+    //   ..initialize().then((value) {
+    //     _controller.setVolume(0);
+    //     _controller.play();
+    //
+    //     _controller.setLooping(true);
+    //     setState(() {});
+    //   });
   }
 
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    _controller.dispose();
+    // _controller.dispose();
   }
 
   @override
@@ -60,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
                     height: 25,
                   ),
                   Image.asset(
-                    "assets/loginpic.png",
+                    "assets/sprinting.gif",
                     width: width * 0.6,
                     height: height * 0.3,
                   ),
@@ -209,7 +208,7 @@ class _LoginPageState extends State<LoginPage> {
                                   color: color1,
                                 ),
                                 label: const Text(
-                                  "Sign up",
+                                  "Registrarse",
                                   style: TextStyle(
                                     color: Colors.white,
                                   ),

@@ -143,7 +143,7 @@ class cotiza {
           // style: estiloLetras18,
         ),
         leading: const Icon(Icons.pages_rounded),
-        iconColor: color3,
+        iconColor: color1,
         subtitle: Text(
           "Cantidad:${element.cantidad}",
           style: const TextStyle(fontWeight: FontWeight.bold),

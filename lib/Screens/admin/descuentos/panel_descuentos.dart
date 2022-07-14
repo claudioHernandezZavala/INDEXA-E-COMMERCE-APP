@@ -25,9 +25,6 @@ class _PanelDescuentosState extends State<PanelDescuentos> {
       appBar: AppBar(
         title: const Text("Descuentos"),
         centerTitle: true,
-        backgroundColor: color3,
-        foregroundColor: color3,
-        titleTextStyle: styleLetrasAppBar,
       ),
       body: Column(
         children: [

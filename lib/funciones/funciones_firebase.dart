@@ -6,9 +6,9 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
+import 'package:indexa/Screens/intros/introNew.dart';
 import 'package:searchfield/searchfield.dart';
 
-import '../Screens/intros/intro.dart';
 import '../bounciPageRoute.dart';
 import '../clases/ItemCarrito.dart';
 import '../clases/categoria.dart';
@@ -57,8 +57,14 @@ obtenerDescuentos(AsyncSnapshot<QuerySnapshot> snapshot) {
 obtenerItemCarrito(AsyncSnapshot<QuerySnapshot> snapshot) {
   return snapshot.data!.docs.map((DocumentSnapshot document) {
     Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
-    return ItemsCarrito(data['ProductRef'], data["cantidad"],
-        document.reference, data['nombre'], data['precio'], data['imagen']);
+    return ItemsCarrito(
+        data['ProductRef'],
+        data["cantidad"],
+        document.reference,
+        data['nombre'],
+        data['precio'],
+        data['imagen'],
+        data["isv"]);
   }).toList();
 }
 
@@ -108,7 +114,8 @@ void subirCarrito(Producto producto, int cantidad, BuildContext context) {
       'cantidad': cantidad,
       'nombre': producto.nombre,
       'precio': producto.precio,
-      'imagen': producto.imagenes[0]
+      'imagen': producto.imagenes[0],
+      "isv": producto.llevaISV
     };
     referencia2.get().then((QuerySnapshot querySnapshot) async {
       if (querySnapshot.size == 0) {
@@ -184,7 +191,7 @@ void registro(BuildContext context) async {
       }).whenComplete(() {
         //  usuarioActual = usuarioNuevo;
         Navigator.of(context).pushAndRemoveUntil(
-            BouncyPageRoute(const Onboard()), (route) => false);
+            BouncyPageRoute(const registerProcess()), (route) => false);
       });
     });
   }

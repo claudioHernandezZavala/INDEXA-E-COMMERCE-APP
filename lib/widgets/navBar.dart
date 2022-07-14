@@ -77,7 +77,8 @@ Drawer drawer(BuildContext context) {
               color: Colors.white,
             ),
             onTap: () {
-              //Navigator.of(context).push(BouncyPageRoute(const LoginPage()));
+              // Navigator.of(context)
+              //     .push(BouncyPageRoute(const registerProcess()));
             },
             title: Text(
               "Terminos y servicios",
